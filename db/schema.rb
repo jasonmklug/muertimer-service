@@ -10,11 +10,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_12_041401) do
+ActiveRecord::Schema.define(version: 2020_05_12_041449) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
   enable_extension "uuid-ossp"
+
+  create_table "life_periods", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.integer "age_in_years", null: false
+    t.float "probability_of_dying_at_age", null: false
+    t.integer "number_surviving_to_age", null: false
+    t.integer "number_dying_at_age", null: false
+    t.integer "expected_years_remaining_at_age", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
 end

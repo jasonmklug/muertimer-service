@@ -1,0 +1,2 @@
+class LifePeriod < ApplicationRecord
+end
