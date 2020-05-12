@@ -1,0 +1,2 @@
+class ReferenceFile < ApplicationRecord
+end

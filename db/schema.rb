@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_12_041449) do
+ActiveRecord::Schema.define(version: 2020_05_12_045858) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -25,6 +25,20 @@ ActiveRecord::Schema.define(version: 2020_05_12_041449) do
     t.integer "expected_years_remaining_at_age", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.uuid "reference_file_id"
+    t.index ["reference_file_id"], name: "index_life_periods_on_reference_file_id"
   end
 
+  create_table "reference_files", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.integer "year_of_report", null: false
+    t.string "sex", null: false
+    t.string "race", null: false
+    t.string "origin", null: false
+    t.string "url"
+    t.string "title"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_foreign_key "life_periods", "reference_files"
 end
